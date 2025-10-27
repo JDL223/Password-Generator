@@ -32,7 +32,6 @@ def save_password(password):
 print("Welcome to the Password Generator!")
 
 while True:
-    os.system('cls' if os.name == 'nt' else 'clear')
     print("\nWhat kind of password do you want to have?")
     print("\n1. Basic Secure password")
     print("2. Custom length password")
@@ -50,7 +49,7 @@ while True:
         
     elif choice == "2":
             
-            pw_length = int(input("Enter your password length: "))
+            pw_length = int(input("Enter your password length (min 4 chars): "))
             pw = fake.password(length=pw_length)
             print("\nYour password:", pw)
             save_password(pw)  
