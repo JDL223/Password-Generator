@@ -45,7 +45,8 @@ while True:
         save_password(pw)
        
     elif choice == "2":
-           
+            
+        # Checks for number
             pw_length = int(input("Enter your password length: "))
             pw = fake.password(length=pw_length)
             print("\nYour password:", pw)
@@ -55,14 +56,17 @@ while True:
         pw = fake.password(special_chars=False)
         print("\nYour password:", pw)
         save_password(pw)
+
     elif choice == "4":
         pw = fake.password(digits=False, upper_case=False)
         print("\nYour password:", pw)
         save_password(pw)
+
     elif choice == "5":
         pw = fake.password(length=18, special_chars=True)
         print("\nYour password:", pw)
         save_password(pw)
+
     elif choice == "6":
         print("\nGoodbye!")
         break
