@@ -5,30 +5,31 @@ import os
 fake = Faker()
 
 def save_password(password):
-    """Saves the generated password to a text file using the os module."""
+    """Ask the user if they want to save the password and then save it to a file."""
     save_choice = input("Do you want to save this password? (y/n): ").strip().lower()
+
+
     if save_choice == 'y':
-        # Get a label for the password
-        password_label = input("Enter a description for this password (ex: 'for Gmail' or 'for Discord'): ")
-        
-        data_to_write = f"[{password_label}] {password}\n"
-        
-        byte_data = data_to_write.encode('utf-8')
+        # Ask what the password is for
+        label = input("Enter a description for this password (ex: 'for Gmail' or 'for Discord'): ")
+
+
+        # Put the label and password together
+        data = f"[{label}] {password}\n"
+
 
         try:
-            fd = os.open('passwords.txt', os.O_WRONLY | os.O_APPEND | os.O_CREAT)
-            
-            os.write(fd, byte_data)
-            
-            print("Password saved to passwords.txt!")
+            # Open the file and add the password to it
+            with open("passwords.txt", "a", encoding="utf-8") as file:
+                file.write(data)
+            print(" Password saved to passwords.txt!")
         except Exception as e:
-            print(f"An error occurred: {e}")
-        finally:
-            os.close(fd)
+            print(f" Error saving password: {e}")
     else:
         print("Password not saved.")
 
-# Menu
+
+    # Menu
 print("Welcome to the Password Generator!")
 
 while True:
