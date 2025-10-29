@@ -29,11 +29,11 @@ print("Welcome to the Password Generator!")
 while True:
     print("\nWhat kind of password do you want to have?")
     print("\n1. Basic Secure password")
-    print("2. Custom length password")
-    print("3. No special characters (letters + numbers only)")
-    print("4. Lowercase only (no digits or uppercase)")
-    print("5. Strong custom password (18 characters, includes everything)")
-    print("6. Quit")
+    print("\n2. Custom length password")
+    print("\n3. No special characters (letters + numbers only)")
+    print("\n4. Lowercase only (no digits or uppercase)")
+    print("\n5. Strong custom password (18 characters, includes everything)")
+    print("\n6. Quit")
 
 
     choice = input("\nEnter your choice (1-6): ")
