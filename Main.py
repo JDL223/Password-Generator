@@ -1,6 +1,7 @@
 from faker import Faker
 import os
 
+os.system('cls')
 # Create an instance of the Faker generator
 fake = Faker()
 
@@ -46,12 +47,12 @@ while True:
        
     elif choice == "2":
             
-        # Checks for number
-            pw_length = int(input("Enter your password length: "))
-            pw = fake.password(length=pw_length)
-            print("\nYour password:", pw)
-            save_password(pw)  
-           
+    # Checks for number
+        pw_length = int(input("Enter your password length: "))
+        pw = fake.password(length=pw_length)
+        print("\nYour password:", pw)
+        save_password(pw)  
+        
     elif choice == "3":
         pw = fake.password(special_chars=False)
         print("\nYour password:", pw)
