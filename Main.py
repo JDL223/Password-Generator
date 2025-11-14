@@ -1,83 +1,125 @@
 from faker import Faker
 import os
+import time
+import random
 
-os.system('cls')
+
+# Clear console
+os.system('cls' if os.name == 'nt' else 'clear')
+
+
 # Create an instance of the Faker generator
 fake = Faker()
 
+
+# Fun loading animation
+def loading_animation(message="Generating password"):
+    print(f"\n{message}", end="")
+    for _ in range(3):
+        time.sleep(0.4)
+        print(".", end="")
+    print("\n")
+
+
 # Save a generated password to file
 def save_password(password):
-
-    save_choice = input("Do you want to save this password? (y/n): ").strip().lower()
+    save_choice = input("💾 Do you want to save this password? (y/n): ").strip().lower()
     if save_choice == 'y':
-
-        # ask what the password is for
-        password_label = input("Enter a description for this password (ex: 'for Gmail' or 'for Discord'): ")
-
-       # Save task to file
-
+        password_label = input("📝 Enter a description for this password (ex: 'for Gmail' or 'for Discord'): ")
         data_to_write = f"{password_label} | {password}\n"
-
-        # open the file and add the new line
         with open("passwords.txt", "a") as file:
             file.write(data_to_write)
-        print("Password saved to passwords.txt!")
+        print("✅ Password saved to passwords.txt!")
     else:
-        print("Password not saved.")
-
-#Menu
-print("Welcome to the Password Generator!")
-while True:
-    print("\nWhat kind of password do you want to have?")
-    print("\n1. Basic Secure password")
-    print("\n2. Custom length password")
-    print("\n3. No special characters (letters + numbers only)")
-    print("\n4. Lowercase only (no digits or uppercase)")
-    print("\n5. Strong custom password (18 characters, includes everything)")
-    print("\n6. Quit")
+        print("❌ Password not saved.")
 
 
-    choice = input("\nEnter your choice (1-6): ")
+# Random motivational messages
+def fun_message():
+    messages = [
+        "🚀 You're a password master now!",
+        "🔥 Strong password, strong security!",
+        "✨ Keep your secrets safe!",
+        "💡 Remember: unique passwords are your superpower!"
+    ]
+    print(random.choice(messages))
 
 
-    if choice == "1":
-        pw = fake.password()
-        print("\nYour password:", pw)
-        save_password(pw)
-       
-    elif choice == "2":
-            
-    # Checks for number
-        pw_length = int(input("Enter your password length: "))
-        pw = fake.password(length=pw_length)
-        print("\nYour password:", pw)
-        save_password(pw)  
-        
-    elif choice == "3":
-        pw = fake.password(special_chars=False)
-        print("\nYour password:", pw)
-        save_password(pw)
-
-    elif choice == "4":
-        pw = fake.password(digits=False, upper_case=False)
-        print("\nYour password:", pw)
-        save_password(pw)
-
-    elif choice == "5":
-        pw = fake.password(length=18, special_chars=True)
-        print("\nYour password:", pw)
-        save_password(pw)
-
-    elif choice == "6":
-        print("\nGoodbye!")
-        break
-    else:
-        print("Invalid choice! Pick a number from 1 to 6.")
-        input("Press Enter to continue...")
-        continue
+# Main menu
+def menu():
+    print("🎉 Welcome to my Password Generator! 🎉")
+    while True:
+        print("\nWhat kind of password do you want to have?")
+        print("1️⃣ Basic Secure password")
+        print("2️⃣ Custom length password")
+        print("3️⃣ No special characters (letters + numbers only)")
+        print("4️⃣ Lowercase only (no digits or uppercase)")
+        print("5️⃣ Strong custom password (18 characters, includes everything)")
+        print("6️⃣ Quit")
 
 
-    again = input("\nDo you want to make another password? (y/n): ").strip().lower()
-    if again != "y":
-        print("\nGoodbye!")
-        break
+        choice = input("\nEnter your choice (1-6): ").strip()
+
+
+        if choice == "1":
+            loading_animation()
+            pw = fake.password()
+            print(f"🔑 Your password: {pw}")
+            save_password(pw)
+            fun_message()
+
+
+        elif choice == "2":
+            try:
+                pw_length = int(input("🔢 Enter your password length: "))
+                loading_animation(f"Generating a {pw_length}-character password")
+                pw = fake.password(length=pw_length)
+                print(f"🔑 Your password: {pw}")
+                save_password(pw)
+                fun_message()
+            except ValueError:
+                print("❌ That’s not a valid number! Try again.")
+
+
+        elif choice == "3":
+            loading_animation("Generating letters + numbers password")
+            pw = fake.password(special_chars=False)
+            print(f"🔑 Your password: {pw}")
+            save_password(pw)
+            fun_message()
+
+
+        elif choice == "4":
+            loading_animation("Generating lowercase-only password")
+            pw = fake.password(digits=False, upper_case=False)
+            print(f"🔑 Your password: {pw}")
+            save_password(pw)
+            fun_message()
+
+
+        elif choice == "5":
+            loading_animation("Generating super strong password")
+            pw = fake.password(length=18, special_chars=True)
+            print(f"🔑 Your password: {pw}")
+            save_password(pw)
+            fun_message()
+
+
+        elif choice == "6":
+            print("\n👋 Goodbye! Stay safe out there!")
+            break
+
+
+        else:
+            print("❌ Invalid choice! Pick a number from 1 to 6.")
+            input("Press Enter to continue...")
+
+
+        again = input("\n🔄 Do you want to make another password? (y/n): ").strip().lower()
+        if again != "y":
+            print("\n👋 Goodbye! Stay secure!")
+            break
+
+
+# Run the menu
+menu()
